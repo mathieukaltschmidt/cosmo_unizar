@@ -1,0 +1,885 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     38433,        877]
+NotebookOptionsPosition[     33792,        809]
+NotebookOutlinePosition[     34189,        825]
+CellTagsIndexPosition[     34146,        822]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[TextData[{
+ StyleBox["Cosmology I - The Early Universe (Academic Year 2023/2024)", 
+  "Title"],
+ "\n",
+ StyleBox["Lecture for the Master\[CloseCurlyQuote]s degree on \
+\[OpenCurlyDoubleQuote]Physics of the Universe: Cosmology, Astrophysics, \
+Particles and Astroparticles\[CloseCurlyDoubleQuote] at the University of \
+Zaragoza, Spain\n", "Subtitle"],
+ "\n",
+ StyleBox["Lectures: Jos\[EAcute] Manuel Carmona (jcarmona@unizar.es)\n\
+Tutorials: Mathieu Kaltschmidt (mkaltschmidt@unizar.es)", "Subsection",
+  FontSize->18,
+  FontColor->RGBColor[1, 0.5, 0]]
+}], "Text",
+ CellChangeTimes->{{3.907387215663321*^9, 3.907387221781693*^9}, {
+   3.90738727374197*^9, 3.907387308949995*^9}, {3.9073894164396*^9, 
+   3.907389424946229*^9}, {3.907389527825519*^9, 3.907389530546151*^9}, {
+   3.907389584735532*^9, 3.9073895853596983`*^9}, 
+   3.907647486674212*^9},ExpressionUUID->"f5548db5-ffd7-4a39-a261-\
+5e7ef02197c9"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Tutorial 2: Introduction to Mathematica and Primordial Nucleosynthesis with \
+PRIMAT\
+\>", "Chapter",
+ CellChangeTimes->{{3.907387215663321*^9, 3.907387221781693*^9}, {
+  3.90738727374197*^9, 3.907387308949995*^9}, {3.9073894164396*^9, 
+  3.9073894187945623`*^9}, {3.907389593786631*^9, 3.907389662252548*^9}, {
+  3.90738972270893*^9, 
+  3.907389724269178*^9}},ExpressionUUID->"81f631c8-e4f3-4f62-b117-\
+092165445b9b"],
+
+Cell[TextData[{
+ "Mathematica is a powerful computational tool that is widely used in various \
+scientific disciplines, including cosmology. It provides a versatile \
+environment for performing mathematical and scientific calculations, \
+visualizing results, and solving complex problems. The most important \
+features that make Mathematica a very powerful tool for (theoretical) \
+physicists are:\n\n- ",
+ StyleBox["Symbolic Computation:",
+  FontWeight->"Bold"],
+ " Mathematica excels in symbolic mathematics, making it suitable for \
+handling equations with variables and parameters commonly encountered in \
+cosmology\n- ",
+ StyleBox["Data Analysis:",
+  FontWeight->"Bold"],
+ " It offers robust data analysis and visualization capabilities, allowing \
+researchers to process and visualize data from very large datasets \n- ",
+ StyleBox["Numerical Simulations:",
+  FontWeight->"Bold"],
+ " Mathematica supports numerical simulations, enabling cosmologists to model \
+various aspects of the universe, such as the evolution of galaxies or the \
+behavior of dark matter\n- ",
+ StyleBox["Visualization:",
+  FontWeight->"Bold"],
+ " Creating informative plots, graphs, and visualizations is simple and \
+intuitive with Mathematica, making it an excellent tool for presenting \
+results in a visually appealing manner.\n  \nWith this exercises, we aim to \
+provide an introduction to the basic syntax of Mathematica used in the \
+context of cosmological computations. We start by introducing the absolute \
+basics about its syntax and  \[OpenCurlyDoubleQuote]translating\
+\[CloseCurlyDoubleQuote] the exercise from the first tutorial to Mathematica \
+and thereby learn about some of the key differences in comparison with \
+Python. After the basic introduction and the recap of the last tutorial, you \
+will learn about Mathematica\[CloseCurlyQuote]s \
+\[OpenCurlyDoubleQuote]UniverseModelData\[CloseCurlyDoubleQuote] database and \
+compare different cosmological models. As a last (and very flexible) \
+exercise, we will have a first glimpse into primordial nucleosynthesis, one \
+of the key topics that will be covered in the following lectures. "
+}], "Text",
+ CellChangeTimes->{{3.907387215663321*^9, 3.907387221781693*^9}, {
+  3.90738727374197*^9, 3.907387308949995*^9}, {3.9073894164396*^9, 
+  3.9073894187945623`*^9}, {3.907389593786631*^9, 3.907389640513916*^9}, {
+  3.907389677504884*^9, 3.9073897903653593`*^9}, {3.907389826579795*^9, 
+  3.907389851994441*^9}, {3.907390811757654*^9, 3.907391067029037*^9}, {
+  3.907393571377676*^9, 
+  3.907393625452158*^9}},ExpressionUUID->"8b537f00-7cb3-4b10-beea-\
+9cbaf11cb9c5"],
+
+Cell[CellGroupData[{
+
+Cell["Exercise 1 : Basic Mathematica Syntax", "Section",
+ CellChangeTimes->{{3.907387382720619*^9, 
+  3.907387407418857*^9}},ExpressionUUID->"f4b58d5b-5d48-4e68-b638-\
+04022dd93c02"],
+
+Cell["\<\
+We start by specifying, that the notebook is saved after every compilation of \
+code (always do that, as Mathematica likes to crash, as we have seen on \
+Friday ..)\
+\>", "Text",
+ CellChangeTimes->{{3.907389884690131*^9, 3.907389944891247*^9}, {
+  3.9073910792296*^9, 
+  3.907391083914261*^9}},ExpressionUUID->"598f5bb2-4d95-4311-b8a0-\
+7b8c93840329"],
+
+Cell[BoxData[{
+ RowBox[{"SetOptions", "[", 
+  RowBox[{"$FrontEndSession", ",", " ", 
+   RowBox[{"NotebookAutoSave", " ", "->", " ", "True"}]}], "]"}], "\n", 
+ RowBox[{"NotebookSave", "[", "]"}]}], "Code",
+ CellLabel->"In[1]:=",ExpressionUUID->"32f11cc1-153f-47b0-a1c6-f50b2802aa95"],
+
+Cell["\<\
+Basic arithmetic computation work as expected. Note that you always need to \
+put the semicolon at the end of an definition and that exponentiation is \
+different than in Python!\
+\>", "Text",
+ CellChangeTimes->{{3.907388167498362*^9, 3.9073881802476053`*^9}, {
+  3.907391093603713*^9, 
+  3.9073911502193317`*^9}},ExpressionUUID->"6d1816f6-71b7-4c48-af53-\
+07f9e5328ea5"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"a", "=", "5"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"b", "=", "3"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"c", "=", 
+   RowBox[{"a", "+", "b"}]}], ";", 
+  RowBox[{"(*", "Addition", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"d", "=", 
+   RowBox[{"a", "*", "b"}]}], ";", 
+  RowBox[{"(*", "Multiplication", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"e", "=", 
+   RowBox[{"a", "^", "b"}]}], ";", 
+  RowBox[{"(*", "Exponentiation", "*)"}]}]}], "Code",
+ CellChangeTimes->{{3.90738764669154*^9, 3.907387651316771*^9}, {
+  3.907648071075898*^9, 
+  3.907648122867008*^9}},ExpressionUUID->"5206c432-fd19-417c-bbeb-\
+2f0f7495cc1d"],
+
+Cell["\<\
+The syntax to define a simple function is also a bit different compared to \
+Python:\
+\>", "Text",
+ CellChangeTimes->{{3.907391162035222*^9, 
+  3.907391196366705*^9}},ExpressionUUID->"b5b6281a-7fe4-4299-9b7f-\
+f0b4004502f3"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", "x_", "]"}], " ", ":=", " ", 
+   RowBox[{"x", "^", "2"}]}], ";", "  ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Define", " ", "a", " ", "simple", " ", "function"}], " ", 
+   "*)"}]}]], "Code",
+ CellChangeTimes->{{3.907387678203383*^9, 3.907387701888399*^9}, {
+  3.907648207086358*^9, 3.907648212620405*^9}},
+ CellLabel->"In[25]:=",ExpressionUUID->"17134186-dfad-42ee-95b4-79d1cabf50e6"],
+
+Cell["\<\
+Of course, we are interested in creating wonderful plots of our computations. \
+This is super easy in Mathematica as everything is very interactive. Starting \
+from this code to simply plot the function f(x), you can easily modify the \
+appearance by clicking on the output and changing the parameters, colors .. \
+Have fun and try it out!\
+\>", "Text",
+ CellChangeTimes->{{3.90739120184968*^9, 3.907391213446393*^9}, {
+  3.907391247705462*^9, 
+  3.90739134784155*^9}},ExpressionUUID->"29a71cfc-8ced-48b0-8d29-\
+1414c3c666ad"],
+
+Cell[BoxData[
+ RowBox[{"?", " ", "Plot"}]], "Input",
+ CellChangeTimes->{{3.907648991904686*^9, 3.907649018873555*^9}},
+ CellLabel->"In[32]:=",ExpressionUUID->"efde353a-2198-4c76-b8cc-aedaf3e31407"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Plot", "[", 
+   RowBox[{
+    RowBox[{"f", "[", "x", "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", "0", ",", "10"}], "}"}]}], "]"}], "  ", 
+  RowBox[{"(*", 
+   RowBox[{"Plot", " ", "the", " ", "function", " ", "f", 
+    RowBox[{"(", "x", ")"}]}], "*)"}]}]], "Code",
+ CellChangeTimes->{{3.907387693063634*^9, 3.907387707461502*^9}, {
+   3.90764831398849*^9, 3.907648317298661*^9}, {3.907648697616336*^9, 
+   3.907648700203014*^9}, {3.9076488403617363`*^9, 3.907648846932518*^9}, 
+   3.90773401231419*^9},ExpressionUUID->"f4df450f-9a54-4cf4-9dc4-\
+85e7fc1a38bc"],
+
+Cell["\<\
+One of the great advantages of Mathematica is the great symbolic output! This \
+helps to visualise even complex datasets, matrices etc. in a nice fashion! \
+Look for example at this simple list and matrix:\
+\>", "Text",
+ CellChangeTimes->{{3.9073913532698812`*^9, 
+  3.907391425179636*^9}},ExpressionUUID->"a04f065a-92e8-4a4b-ba9a-\
+9b9a0a41cb74"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"numbers", "=", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "2", ",", "3", ",", "4", ",", "5"}], "}"}]}], ";"}], 
+  RowBox[{"(*", 
+   RowBox[{"Create", " ", "a", " ", "list"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"MatrixForm", "[", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "4"}], "}"}]}], "}"}], "]"}], "  ", 
+  RowBox[{"(*", 
+   RowBox[{"Display", " ", "a", " ", "matrix"}], "*)"}]}]}], "Code",
+ CellChangeTimes->{{3.9073877222701*^9, 3.907387724310405*^9}},
+ CellLabel->"In[33]:=",ExpressionUUID->"522c7478-1483-4e58-8129-b02d04fe0fc5"],
+
+Cell["\<\
+To directly compare Python and Mathematica syntax, I \
+\[OpenCurlyDoubleQuote]translated\[CloseCurlyDoubleQuote] you the exercise of \
+last time into Mathematica. Try to understand the syntax and try to find the \
+key differences!\
+\>", "Text",
+ CellChangeTimes->{{3.907391442667942*^9, 
+  3.9073915330255947`*^9}},ExpressionUUID->"caf89a0b-f4c1-48e2-ae63-\
+238c5bb49a37"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"aDot", "[", 
+   RowBox[{
+   "a_", ",", " ", "t_", ",", " ", "OmegaR0_", ",", " ", "OmegaM0_", ",", " ",
+     "OmegaK_", ",", " ", "OmegaDE0_", ",", " ", "H0_"}], "]"}], " ", ":=", 
+  " ", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"H", ",", " ", "daDt"}], "}"}], ",", " ", 
+    RowBox[{"(*", 
+     RowBox[{"Here", " ", "we", " ", "use", " ", 
+      RowBox[{"Module", " ", "[", "...", "]"}], " ", "to", " ", "declare", 
+      " ", "local", " ", "variables"}], "*)"}], "\n", "  ", 
+    RowBox[{
+     RowBox[{"H", " ", "=", " ", 
+      RowBox[{"H0", "*", 
+       RowBox[{"Sqrt", "[", 
+        RowBox[{
+         RowBox[{"OmegaR0", "/", 
+          RowBox[{"a", "^", "4"}]}], " ", "+", " ", 
+         RowBox[{"OmegaM0", "/", 
+          RowBox[{"a", "^", "3"}]}], " ", "+", " ", 
+         RowBox[{"OmegaK", "/", 
+          RowBox[{"a", "^", "2"}]}], " ", "+", " ", "OmegaDE0"}], "]"}]}]}], 
+     ";", "\n", "  ", 
+     RowBox[{"daDt", " ", "=", " ", 
+      RowBox[{"a", " ", "*", " ", "H"}]}], ";", "\n", "  ", 
+     RowBox[{"Return", "[", "daDt", "]"}]}]}], "\n", "]"}]}]], "Code",
+ CellChangeTimes->{
+  3.907387747473896*^9, {3.907391480046639*^9, 3.9073914922437687`*^9}, {
+   3.907391537418964*^9, 3.9073915470346317`*^9}, {3.907391585993216*^9, 
+   3.907391604049035*^9}},
+ CellLabel->"In[35]:=",ExpressionUUID->"9e789f98-b18d-4e93-a9b4-efe04eb32e6c"],
+
+Cell["\<\
+The function can then easily be called by specifying the input parameters:\
+\>", "Text",
+ CellChangeTimes->{{3.907391552244955*^9, 3.907391575027893*^9}, 
+   3.9073916172473097`*^9},ExpressionUUID->"f63dc003-0919-4f49-aaa2-\
+331094faafa5"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"Example", " ", "usage"}], " ", "*)"}], "\n", 
+  RowBox[{"aDot", "[", 
+   RowBox[{
+   "1", ",", " ", "0", ",", " ", "0.1", ",", " ", "0.3", ",", " ", "0.0", ",",
+     " ", "0.6", ",", " ", "70"}], "]"}]}]], "Code",
+ CellChangeTimes->{
+  3.907387747473896*^9, {3.907391480046639*^9, 3.9073914922437687`*^9}, {
+   3.907391537418964*^9, 3.9073915470346317`*^9}, {3.907649692162653*^9, 
+   3.9076496922002497`*^9}},
+ CellLabel->"In[37]:=",ExpressionUUID->"b8d29568-d001-414d-aa34-ab18d1a5b1f0"],
+
+Cell["\<\
+Below you find the implementation of the Euler scheme that you implemented \
+the last time. Understanding the loop should be straightforward, note, that \
+the notation  is slightly different here! Change the parameters and see how \
+this changes the runtime and the results!\
+\>", "Text",
+ CellChangeTimes->{{3.9073916242856197`*^9, 3.907391747685442*^9}, 
+   3.9073936799503813`*^9},ExpressionUUID->"87d3916a-334f-4208-9bb9-\
+d70dc0d0d51f"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"start", " ", "=", " ", 
+    RowBox[{"AbsoluteTime", "[", "]"}]}], ";"}], "\n", "\n", 
+  RowBox[{"(*", 
+   RowBox[{"Define", " ", "the", " ", "parameters"}], "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{"OmegaR0", " ", "=", " ", "0.7"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"OmegaM0", " ", "=", " ", "0.0"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"OmegaK", " ", "=", " ", "0.0"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"OmegaDE0", " ", "=", " ", "0.0"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"H0", " ", "=", " ", "70"}], ";"}], "\n", "\n", 
+  RowBox[{"(*", 
+   RowBox[{"Define", " ", "the", " ", "initial", " ", "condition"}], 
+   "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{"a0", " ", "=", " ", "1"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"t0", " ", "=", " ", "0"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"tf", " ", "=", " ", "14"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"numSteps", " ", "=", " ", 
+    RowBox[{"10", "^", "5"}]}], ";"}], " "}], "\n", 
+ RowBox[{
+  RowBox[{"dt", " ", "=", " ", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"tf", " ", "-", " ", "t0"}], ")"}], "/", "numSteps"}]}], ";", 
+  " ", 
+  RowBox[{"(*", 
+   RowBox[{"Time", " ", "step", " ", "size"}], "*)"}], "\n", "\n", 
+  RowBox[{"(*", 
+   RowBox[{"Initialize", " ", "arrays", " ", "for", " ", "a", 
+    RowBox[{"(", "t", ")"}], " ", "and", " ", "t"}], "*)"}], "\n", 
+  RowBox[{"at", " ", "=", " ", 
+   RowBox[{"Table", "[", 
+    RowBox[{"0", ",", " ", 
+     RowBox[{"{", "numSteps", "}"}]}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"t", " ", "=", " ", 
+    RowBox[{"Table", "[", 
+     RowBox[{"0", ",", " ", 
+      RowBox[{"{", "numSteps", "}"}]}], "]"}]}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"at", "[", 
+    RowBox[{"[", "1", "]"}], "]"}], " ", "=", " ", "a0"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"t", "[", 
+     RowBox[{"[", "1", "]"}], "]"}], " ", "=", " ", "t0"}], ";"}], "\n", "\n", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Perform", " ", "time"}], "-", 
+    RowBox[{
+    "stepping", " ", "using", " ", "the", " ", "Euler", " ", "method"}]}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"For", "[", 
+   RowBox[{
+    RowBox[{"i", " ", "=", " ", "1"}], ",", " ", 
+    RowBox[{"i", " ", "<", " ", "numSteps"}], ",", " ", 
+    RowBox[{
+     RowBox[{"i", "++"}], "2"}], ",", "\n", " ", 
+    RowBox[{
+     RowBox[{"adot", " ", "=", " ", 
+      RowBox[{"aDot", "[", 
+       RowBox[{
+        RowBox[{"at", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], ",", " ", 
+        RowBox[{"t", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], ",", " ", "OmegaR0", ",", " ", 
+        "OmegaM0", ",", " ", "OmegaK", ",", " ", "OmegaDE0", ",", " ", "H0"}],
+        "]"}]}], ";", "\n", " ", 
+     RowBox[{"aNew", " ", "=", " ", 
+      RowBox[{
+       RowBox[{"at", "[", 
+        RowBox[{"[", "i", "]"}], "]"}], " ", "+", " ", 
+       RowBox[{"dt", "*", "adot"}]}]}], ";", "\n", " ", 
+     RowBox[{
+      RowBox[{"at", "[", 
+       RowBox[{"[", 
+        RowBox[{"i", " ", "+", " ", "1"}], "]"}], "]"}], " ", "=", " ", 
+      "aNew"}], ";", "\n", " ", 
+     RowBox[{
+      RowBox[{"t", "[", 
+       RowBox[{"[", 
+        RowBox[{"i", " ", "+", " ", "1"}], "]"}], "]"}], " ", "=", " ", 
+      RowBox[{
+       RowBox[{"t", "[", 
+        RowBox[{"[", "i", "]"}], "]"}], " ", "+", " ", "dt"}]}], ";"}]}], 
+   "]"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"end", " ", "=", " ", 
+    RowBox[{"AbsoluteTime", "[", "]"}]}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{"Print", "[", 
+   RowBox[{"\"\<Done. This computation took \>\"", ",", " ", 
+    RowBox[{"end", " ", "-", " ", "start"}], ",", " ", "\"\< seconds.\>\""}], 
+   "]"}], ";"}]}], "Code",
+ CellChangeTimes->{{3.907387758973118*^9, 3.907387864022616*^9}, {
+   3.90738791408281*^9, 3.907387925675561*^9}, {3.9073880038030577`*^9, 
+   3.907388009743721*^9}, {3.907388047861577*^9, 3.90738808912964*^9}, {
+   3.9073881224842443`*^9, 3.907388124336341*^9}, {3.907390306990178*^9, 
+   3.907390307075062*^9}, {3.90739037508515*^9, 3.907390375451807*^9}, {
+   3.907390452134399*^9, 3.9073904547963467`*^9}, 3.907391690297944*^9, {
+   3.907393696514537*^9, 3.907393699883366*^9}, {3.907649769942685*^9, 
+   3.907649769989238*^9}, {3.907650035432225*^9, 3.9076500469579763`*^9}, {
+   3.907650286001092*^9, 3.90765028604397*^9}},
+ CellLabel->"In[61]:=",ExpressionUUID->"c480f63f-509e-4113-b5cd-45ec2a5376fb"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Done. This computation took \"\>", "\[InvisibleSpace]", 
+   "1.35242`6.5826565781166275", "\[InvisibleSpace]", "\<\" seconds.\"\>"}],
+  SequenceForm[
+  "Done. This computation took ", 1.35242`6.5826565781166275, " seconds."],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.907650270343102*^9, 3.907650287870694*^9}},
+ CellLabel->
+  "During evaluation of \
+In[61]:=",ExpressionUUID->"27f4f855-7157-4a28-9a0c-3cf381cd6bd0"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"?", " ", "For"}]], "Input",
+ CellChangeTimes->{{3.9076500537145233`*^9, 3.907650055704101*^9}},
+ CellLabel->"In[38]:=",ExpressionUUID->"ae744c4b-0890-4a1c-b47a-b722c24cbe06"],
+
+Cell["Now we prepare the data to be able to plot and evaluate it:", "Text",
+ CellChangeTimes->{{3.907391760956725*^9, 
+  3.907391779507134*^9}},ExpressionUUID->"21798bad-1098-401c-9743-\
+4e5056ee1387"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "Create", " ", "a", " ", "list", " ", "of", " ", "data", " ", "points", 
+    " ", "for", " ", "the", " ", "plot"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"data", "=", 
+    RowBox[{"Transpose", "[", 
+     RowBox[{"{", 
+      RowBox[{"t", ",", " ", 
+       RowBox[{"at", "/", 
+        RowBox[{"Last", "[", "at", "]"}]}]}], "}"}], "]"}]}], ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "Remember", " ", "the", " ", "normalisation", " ", "to", " ", "1", " ", 
+     "at", " ", "the", " ", "end"}], ",", " ", 
+    RowBox[{"as", " ", "discussed", " ", "last", " ", "time"}]}], 
+   "*)"}]}]], "Code",
+ CellChangeTimes->{{3.907387938358346*^9, 3.907387941939355*^9}, {
+   3.907388033171441*^9, 3.9073880388561068`*^9}, {3.90738810977509*^9, 
+   3.907388112446349*^9}, 3.907389177984727*^9, {3.907390277970826*^9, 
+   3.907390285216043*^9}, {3.907391784304736*^9, 3.9073918023173523`*^9}, 
+   3.907393708334455*^9},
+ CellLabel->"In[81]:=",ExpressionUUID->"cc87923a-b1a6-4a66-90b0-5522cb74e97b"],
+
+Cell["\<\
+In general, Mathematica has very nice output formats, for example for tables. \
+Have a look at the results of the previous computation :\
+\>", "Text",
+ CellChangeTimes->{{3.907390017261796*^9, 3.907390094516562*^9}, 
+   3.907390332342264*^9, 
+   3.9073918115745783`*^9},ExpressionUUID->"1212cc07-e962-46a0-8d96-\
+f65a1a1fa403"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Create", " ", "a", " ", "table", " ", "with", " ", "titles"}], 
+   "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"table", "=", 
+     RowBox[{"Prepend", "[", 
+      RowBox[{"data", ",", 
+       RowBox[{"{", 
+        RowBox[{"\"\<Time (t)\>\"", ",", "\"\<Scale Factor (a(t))\>\""}], 
+        "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "Extract", " ", "the", " ", "first", " ", "20", " ", "rows", " ", "of", 
+      " ", "the", " ", "table"}], ",", " ", 
+     RowBox[{
+     "to", " ", "avoid", " ", "crashing", " ", "the", " ", "notebook", " ", 
+      "by", " ", "displaying", " ", "O", 
+      RowBox[{"(", 
+       RowBox[{"10", "^", "4"}], ")"}], " ", "entries"}]}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"table20", "=", 
+     RowBox[{"Take", "[", 
+      RowBox[{"table", ",", "20"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   "\n", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Display", " ", "the", " ", "limited", " ", "table", " ", "using", " ", 
+     "TableForm"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"TableForm", "[", 
+    RowBox[{"table20", ",", 
+     RowBox[{"TableHeadings", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"None", ",", "None"}], "}"}]}]}], "]"}]}]}]], "Code",
+ CellChangeTimes->{{3.907389182028901*^9, 3.907389200963681*^9}, {
+   3.907389980488882*^9, 3.9073899999426107`*^9}, {3.907390175455886*^9, 
+   3.907390214306498*^9}, {3.90739031548874*^9, 3.907390323910261*^9}, {
+   3.907390420994423*^9, 3.907390445743696*^9}, {3.9073918200344353`*^9, 
+   3.90739183721388*^9}, 3.907650424335541*^9, {3.907650610673661*^9, 
+   3.90765061885739*^9}, {3.907650651438258*^9, 3.907650655451364*^9}},
+ CellLabel->"In[97]:=",ExpressionUUID->"7be673f3-f1c5-4992-a831-d186d781119c"],
+
+Cell["\<\
+Now we are ready to plot the result. Please feel free to modify the \
+appearance of the plot as you like!\
+\>", "Text",
+ CellChangeTimes->{{3.90739185165697*^9, 
+  3.9073918826558104`*^9}},ExpressionUUID->"edb96a77-5bd3-49b7-bec2-\
+6c006dbdeac7"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Plot", " ", "the", " ", "result"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"ListLinePlot", "[", 
+   RowBox[{"data", ",", 
+    RowBox[{"PlotLabel", "\[Rule]", "\"\<Scale Factor vs. Time\>\""}], ",", 
+    RowBox[{"AxesLabel", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<Time [Gyr]\>\"", ",", "\"\<Scale Factor (a(t))\>\""}], 
+      "}"}]}], ",", 
+    RowBox[{"ImageSize", "\[Rule]", "Large"}]}], "]"}]}]], "Code",
+ CellChangeTimes->{{3.907387938358346*^9, 3.907387941939355*^9}, {
+   3.907388033171441*^9, 3.9073880388561068`*^9}, {3.90738810977509*^9, 
+   3.907388112446349*^9}, 3.907389177984727*^9},
+ CellLabel->
+  "In[100]:=",ExpressionUUID->"ad2f08b5-ba47-43b7-9ce5-5faef73e9973"],
+
+Cell["\<\
+Of course, Mathematica comes with many tools to solve differential equations \
+(same as with e.g. odeint in Python as seen last time ). An additional \
+exercise here would be to learn about Mathematica\[CloseCurlyQuote]s NDSolve \
+to reproduce the result and see if you can speed up things!  You can use the \
+following code to get information about the syntax:\
+\>", "Text",
+ CellChangeTimes->{{3.90738813351294*^9, 3.9073881593494577`*^9}, {
+  3.907390485964345*^9, 3.907390514341386*^9}, {3.907390565842621*^9, 
+  3.907390650312482*^9}, {3.9073907429108686`*^9, 
+  3.907390768713359*^9}},ExpressionUUID->"199e6972-0981-4ce3-b84e-\
+e86f2b0477e0"],
+
+Cell[BoxData[
+ RowBox[{"?", " ", "NDSolve"}]], "Code",
+ CellChangeTimes->{{3.9073907206621313`*^9, 3.90739073490688*^9}},
+ CellLabel->
+  "In[101]:=",ExpressionUUID->"e06395c3-9e41-478b-82fb-6d45f5fa5aaa"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Exercise 2 : Studying Cosmological Models with Mathematica", "Section",
+ CellChangeTimes->{{3.9073874095172033`*^9, 3.90738746464435*^9}, {
+  3.907389143343938*^9, 
+  3.907389149258387*^9}},ExpressionUUID->"f24d1473-5f9c-4283-aaf2-\
+8bef1a58206d"],
+
+Cell[TextData[{
+ "The \[OpenCurlyDoubleQuote]UniverseModelData\[CloseCurlyDoubleQuote] module \
+in Mathematica is a powerful resource, allowing us to explore and analyze \
+various cosmological models.The model we have discussed in the lectures so \
+far, the \[CapitalLambda]CDM  model, is at the forefront of our understanding \
+of the universe' s structure and evolution. It provides a remarkably accurate \
+framework for explaining a wide range of cosmological phenomena, from the \
+cosmic microwave background to the large scale structure of the universe.\n\n\
+With UniverseModelData, we can access and compute essential parameters that \
+define the \[CapitalLambda]CDM model.This module opens the door to \
+understanding key aspects of the universe, such as the Hubble constant, \
+critical density, and matter or dark energy content. For your exercise, we' \
+ll delve into different cosmological models and harness the capabilities of \
+UniverseModelData to compute and visualise cosmological parameters. You can \
+find detailed information on how to use UniverseModelData in the official \
+documentation (",
+ StyleBox["https : \
+//reference.wolfram.com/language/ref/UniverseModelData.html",
+  FontColor->RGBColor[0, 0, 1]],
+ ").\n\nIn this  exercise, you will have the opportunity to explore various \
+cosmological models available in the \[OpenCurlyDoubleQuote]UniverseModelData\
+\[CloseCurlyDoubleQuote] module. By varying the model parameters and focusing \
+on a parameter of your choice, you will create plots to observe and compare \
+the evolution of the universe across different models.\n\n",
+ StyleBox["Concrete Instructions:",
+  FontWeight->"Bold"],
+ "\nSelect a parameter of interest that you\[CloseCurlyQuote]d like to \
+investigate. It could be the Hubble constant (i.e. you could reproduce the \
+result from the previous exercise), dark energy density, or any other \
+parameter available in the module. Choose a parameter that intrigues you or \
+relates to your specific research interests. A list of all available \
+parameters can be obtained via:"
+}], "Text",
+ CellChangeTimes->{{3.907388288567347*^9, 3.907388472699905*^9}, {
+   3.907388832895259*^9, 3.907388975083131*^9}, 
+   3.907389283549282*^9},ExpressionUUID->"3ead93a6-8a54-41f8-8624-\
+40c2f53016b0"],
+
+Cell[BoxData[
+ RowBox[{"UniverseModelData", "[", "\"\<Properties\>\"", "]"}]], "Code",
+ CellChangeTimes->{{3.907388481911339*^9, 3.907388497965044*^9}, 
+   3.907388546714815*^9},
+ CellLabel->
+  "In[102]:=",ExpressionUUID->"bb73d094-76b2-4312-80fb-e2cb329781a1"],
+
+Cell["\<\
+
+Next, select different cosmological models from the module. The module offers \
+a range of models beyond \[CapitalLambda]CDM, such as Quintessence, Scalar \
+Field, and more. Explore these models and choose at least two different ones \
+to compare. See,\
+\>", "Text",
+ CellChangeTimes->{{3.907388288567347*^9, 3.907388476002668*^9}, 
+   3.907388522491819*^9, {3.907388568001142*^9, 3.907388581790471*^9}, {
+   3.907389000801414*^9, 
+   3.90738902494713*^9}},ExpressionUUID->"86f3b024-acd3-43ba-a855-\
+61aa0cfbf82a"],
+
+Cell[BoxData[
+ RowBox[{"UniverseModelData", "[", "\"\<Models\>\"", "]"}]], "Code",
+ CellChangeTimes->{{3.907388584005094*^9, 3.9073885840158043`*^9}},
+ CellLabel->
+  "In[103]:=",ExpressionUUID->"8cb4614a-2b0d-459a-981f-b0985b2218ae"],
+
+Cell["for a list of the implemented models and ", "Text",
+ CellChangeTimes->{{3.907388288567347*^9, 3.907388476002668*^9}, 
+   3.907388522491819*^9, {3.907388568001142*^9, 
+   3.907388607529892*^9}},ExpressionUUID->"6862453a-7631-4366-80e2-\
+630ed2d67467"],
+
+Cell[BoxData[
+ RowBox[{"UniverseModelData", "[", "\"\<DeSitter\>\"", "]"}]], "Code",
+ CellChangeTimes->{{3.907388622516954*^9, 3.9073886225266867`*^9}, {
+  3.9076510681746683`*^9, 3.9076510692459087`*^9}},
+ CellLabel->
+  "In[106]:=",ExpressionUUID->"9e319fda-029a-42e0-949a-8c23e3ea5b31"],
+
+Cell["\<\
+to have a look at the key parameters of a certain model. 
+
+Vary the selected parameter across the chosen models. Change its value to \
+observe the impact on the universe's evolution.
+Compute and create plots for each model that depict the evolution of the \
+universe with the altered parameter. The x-axis should represent time, and \
+the y-axis should depict a relevant cosmological variable (e.g., the scale \
+factor). Label the plots appropriately, mentioning the model and the \
+parameter values you've selected. Also, include a legend to distinguish \
+between the different models.
+ Analyze the plots and observe how changes in the parameter affect the \
+universe's evolution in each model. Consider factors like expansion rates, \
+matter-dark energy ratios, or any other relevant phenomena.
+ Draw conclusions based on your observations and present your findings, \
+highlighting the impact of varying the chosen parameter on the universe's \
+behavior in different cosmological models.
+ 
+ For example, the following line of code would get you the value of the scale \
+factor for the \[CapitalLambda]CDM model 0.1 Gyr after the Big Bang (\
+\[CapitalLambda]CDM is the standard choice, that\[CloseCurlyQuote]s why we \
+did not need to specify anything):\
+\>", "Text",
+ CellChangeTimes->{{3.907388288567347*^9, 3.907388476002668*^9}, 
+   3.907388522491819*^9, {3.907388568001142*^9, 3.907388797323475*^9}, 
+   3.907389042455152*^9, {3.907391926358408*^9, 
+   3.9073919295174093`*^9}},ExpressionUUID->"d35d7a90-00bf-4c56-a50d-\
+f842a11ba142"],
+
+Cell[BoxData[
+ RowBox[{"UniverseModelData", "[", 
+  RowBox[{
+   RowBox[{"Quantity", "[", 
+    RowBox[{"100000000", ",", "\"\<Years\>\""}], "]"}], ",", 
+   "\"\<ScaleFactor\>\""}], "]"}]], "Code",
+ CellChangeTimes->{{3.907388525118236*^9, 3.907388527972506*^9}, {
+  3.907651102791174*^9, 3.907651107250352*^9}, {3.9076512127126617`*^9, 
+  3.907651221001478*^9}},
+ CellLabel->
+  "In[109]:=",ExpressionUUID->"218e6ea6-5f4e-4ca2-a3b8-bc51617e68a0"],
+
+Cell["\<\
+
+This exercise offers the opportunity to gain insights into the diversity of \
+cosmological models and the effects of parameter variations. It will enhance \
+your understanding of how different factors shape the universe's evolution \
+and structure in more detail and conclude this part of the lecture.\
+\>", "Text",
+ CellChangeTimes->{{3.907388288567347*^9, 3.907388476002668*^9}, {
+  3.907388809624754*^9, 3.907388817312594*^9}, {3.9073892346696587`*^9, 
+  3.907389258112979*^9}},ExpressionUUID->"3af8c145-1510-462e-a69b-\
+f65536b47413"],
+
+Cell[BoxData[
+ RowBox[{"?", " ", "UniverseModelData"}]], "Input",
+ CellChangeTimes->{{3.907651570928678*^9, 3.907651576385584*^9}},
+ CellLabel->
+  "In[110]:=",ExpressionUUID->"72cd1fd3-d59a-448b-a136-9fc7654793b4"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.907651926325512*^9, 
+  3.9076519298375998`*^9}},ExpressionUUID->"290340e9-425a-4e7e-b891-\
+5195d3354e0a"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Exercise 3: Primordial Nucleosynthesis with PRIMAT", "Section",
+ CellChangeTimes->{{3.9073874678794603`*^9, 
+  3.907387486784027*^9}},ExpressionUUID->"e92e6943-a20e-43c0-9025-\
+230417d9a0e6"],
+
+Cell[TextData[{
+ "\[LineSeparator]Primordial nucleosynthesis is a fundamental process in the \
+universe' s early moments, where the basic building blocks of matter \
+\[LongDash] nuclei \[LongDash] were formed. This intriguing phenomenon is at \
+the heart of our understanding of the cosmos and plays a pivotal role in \
+unraveling the universe' s history. At the most fundamental level, primordial \
+nucleosynthesis helps us address profound questions about the universe, such \
+as : \n\t- ",
+ StyleBox["Elemental Abundances: ",
+  FontWeight->"Bold"],
+ " Why are there specific ratios of elements like hydrogen, helium, and \
+lithium in the universe? \n\t",
+ StyleBox["- Cosmic Microwave Background:",
+  FontWeight->"Bold"],
+ " How does the relic radiation from the Big Bang, known as the cosmic \
+microwave background, provide insights into the universe' s early conditions? \
+\n\t",
+ StyleBox["- Cosmic Evolution :",
+  FontWeight->"Bold"],
+ " How has the universe evolved from its early, hot, and dense state to its \
+current form? \n\nStudying primordial nucleosynthesis is a complex task that \
+requires a deep understanding of nuclear reactions, thermodynamics, and the \
+physics of the early universe. This is where Mathematica proves to be a very \
+powerful tool. Mathematica' s power lies in its ability to handle complex \
+mathematical and physical calculations very efficiently. \n\nIn this context, \
+\[OpenCurlyDoubleQuote]PRIMAT\[CloseCurlyDoubleQuote] (short for \
+\[OpenCurlyDoubleQuote]PRImordial MATter\[CloseCurlyDoubleQuote])  utilizes \
+Mathematica' s capabilities to facilitate the exploration and comprehension \
+of the nucleosynthesis processes that shaped the universe. \nYour exercise \
+will be to study the main code and the examples provided with the PRIMAT \
+distribution that you can find in the course materials on Moodle (",
+ StyleBox["PRIMAT Source Code.zip",
+  FontColor->GrayLevel[0.5]],
+ "). It is based on the compilation of the results of the paper ",
+ StyleBox["https://arxiv.org/abs/1801.08023. ",
+  FontColor->RGBColor[0, 0, 1]],
+ StyleBox["Have a look!",
+  FontColor->GrayLevel[0]],
+ "\nFor the grading of this exercise we expect you to create your own \
+notebook presenting at least one of the calculations discussed as example \
+(all the example notebooks are in the folder \[OpenCurlyDoubleQuote]Examples\
+\[CloseCurlyDoubleQuote] in the archive), focussing on a clear presentation \
+of the physics implications and well readable plots. If you decide to use the \
+same plot settings as in the example notebooks, argue why you think this \
+presentation seemed appealing to you!\n\nCarefully read and follow the \
+instructions by the authors, that you can find in the respective folders, \
+usually as README files or directly in the notebooks.\n\nAs an useful \
+resource, have a look at this tutorial by one of the main authors of the \
+code, C. Pitrou: ",
+ StyleBox["https://indico.cern.ch/event/955391/contributions/4086268/\
+attachments/2133869/3598041/TOOLS_2020_PRIMAT_tutorial.pdf",
+  FontColor->RGBColor[0, 0, 1]]
+}], "Text",
+ CellChangeTimes->{{3.907387977104677*^9, 3.907387989712858*^9}, {
+  3.9073919826965313`*^9, 3.907392586201346*^9}, {3.9073926320495768`*^9, 
+  3.907392772279674*^9}, {3.90739348431061*^9, 3.9073934923782043`*^9}, {
+  3.90739353071215*^9, 
+  3.907393544749937*^9}},ExpressionUUID->"2fe26198-e3ce-4c80-a66e-\
+af14297d56e7"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{Full, Full},
+WindowMargins->{{273, Automatic}, {Automatic, 156}},
+FrontEndVersion->"12.1 for Mac OS X x86 (64-bit) (June 19, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"1ed032e4-4cda-47f3-b518-b60280458082"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 914, 19, 230, "Text",ExpressionUUID->"f5548db5-ffd7-4a39-a261-5e7ef02197c9"],
+Cell[CellGroupData[{
+Cell[1497, 43, 428, 9, 86, "Chapter",ExpressionUUID->"81f631c8-e4f3-4f62-b117-092165445b9b"],
+Cell[1928, 54, 2618, 45, 332, "Text",ExpressionUUID->"8b537f00-7cb3-4b10-beea-9cbaf11cb9c5"],
+Cell[CellGroupData[{
+Cell[4571, 103, 182, 3, 84, "Section",ExpressionUUID->"f4b58d5b-5d48-4e68-b638-04022dd93c02"],
+Cell[4756, 108, 361, 8, 44, "Text",ExpressionUUID->"598f5bb2-4d95-4311-b8a0-7b8c93840329"],
+Cell[5120, 118, 282, 5, 92, "Code",ExpressionUUID->"32f11cc1-153f-47b0-a1c6-f50b2802aa95"],
+Cell[5405, 125, 381, 8, 44, "Text",ExpressionUUID->"6d1816f6-71b7-4c48-af53-07f9e5328ea5"],
+Cell[5789, 135, 651, 18, 162, "Code",ExpressionUUID->"5206c432-fd19-417c-bbeb-2f0f7495cc1d"],
+Cell[6443, 155, 234, 6, 44, "Text",ExpressionUUID->"b5b6281a-7fe4-4299-9b7f-f0b4004502f3"],
+Cell[6680, 163, 436, 10, 65, "Code",ExpressionUUID->"17134186-dfad-42ee-95b4-79d1cabf50e6"],
+Cell[7119, 175, 536, 10, 73, "Text",ExpressionUUID->"29a71cfc-8ced-48b0-8d29-1414c3c666ad"],
+Cell[7658, 187, 197, 3, 37, "Input",ExpressionUUID->"efde353a-2198-4c76-b8cc-aedaf3e31407"],
+Cell[7858, 192, 602, 14, 65, "Code",ExpressionUUID->"f4df450f-9a54-4cf4-9dc4-85e7fc1a38bc"],
+Cell[8463, 208, 357, 7, 44, "Text",ExpressionUUID->"a04f065a-92e8-4a4b-ba9a-9b9a0a41cb74"],
+Cell[8823, 217, 697, 19, 90, "Code",ExpressionUUID->"522c7478-1483-4e58-8129-b02d04fe0fc5"],
+Cell[9523, 238, 382, 8, 44, "Text",ExpressionUUID->"caf89a0b-f4c1-48e2-ae63-238c5bb49a37"],
+Cell[9908, 248, 1411, 34, 162, "Code",ExpressionUUID->"9e789f98-b18d-4e93-a9b4-efe04eb32e6c"],
+Cell[11322, 284, 249, 5, 44, "Text",ExpressionUUID->"f63dc003-0919-4f49-aaa2-331094faafa5"],
+Cell[11574, 291, 547, 12, 90, "Code",ExpressionUUID->"b8d29568-d001-414d-aa34-ab18d1a5b1f0"],
+Cell[12124, 305, 451, 8, 44, "Text",ExpressionUUID->"87d3916a-334f-4208-9bb9-d70dc0d0d51f"],
+Cell[CellGroupData[{
+Cell[12600, 317, 4420, 120, 834, "Code",ExpressionUUID->"c480f63f-509e-4113-b5cd-45ec2a5376fb"],
+Cell[17023, 439, 475, 10, 29, "Print",ExpressionUUID->"27f4f855-7157-4a28-9a0c-3cf381cd6bd0"]
+}, Open  ]],
+Cell[17513, 452, 198, 3, 37, "Input",ExpressionUUID->"ae744c4b-0890-4a1c-b47a-b722c24cbe06"],
+Cell[17714, 457, 201, 3, 44, "Text",ExpressionUUID->"21798bad-1098-401c-9743-4e5056ee1387"],
+Cell[17918, 462, 1069, 25, 90, "Code",ExpressionUUID->"cc87923a-b1a6-4a66-90b0-5522cb74e97b"],
+Cell[18990, 489, 337, 7, 44, "Text",ExpressionUUID->"1212cc07-e962-46a0-8d96-f65a1a1fa403"],
+Cell[19330, 498, 1849, 44, 234, "Code",ExpressionUUID->"7be673f3-f1c5-4992-a831-d186d781119c"],
+Cell[21182, 544, 256, 6, 44, "Text",ExpressionUUID->"edb96a77-5bd3-49b7-bec2-6c006dbdeac7"],
+Cell[21441, 552, 745, 16, 90, "Code",ExpressionUUID->"ad2f08b5-ba47-43b7-9ce5-5faef73e9973"],
+Cell[22189, 570, 658, 11, 73, "Text",ExpressionUUID->"199e6972-0981-4ce3-b84e-e86f2b0477e0"],
+Cell[22850, 583, 204, 4, 65, "Code",ExpressionUUID->"e06395c3-9e41-478b-82fb-6d45f5fa5aaa"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23091, 592, 253, 4, 84, "Section",ExpressionUUID->"f24d1473-5f9c-4283-aaf2-8bef1a58206d"],
+Cell[23347, 598, 2278, 36, 332, "Text",ExpressionUUID->"3ead93a6-8a54-41f8-8624-40c2f53016b0"],
+Cell[25628, 636, 261, 5, 65, "Code",ExpressionUUID->"bb73d094-76b2-4312-80fb-e2cb329781a1"],
+Cell[25892, 643, 525, 11, 73, "Text",ExpressionUUID->"86f3b024-acd3-43ba-a855-61aa0cfbf82a"],
+Cell[26420, 656, 233, 4, 65, "Code",ExpressionUUID->"8cb4614a-2b0d-459a-981f-b0985b2218ae"],
+Cell[26656, 662, 256, 4, 44, "Text",ExpressionUUID->"6862453a-7631-4366-80e2-630ed2d67467"],
+Cell[26915, 668, 288, 5, 65, "Code",ExpressionUUID->"9e319fda-029a-42e0-949a-8c23e3ea5b31"],
+Cell[27206, 675, 1551, 27, 274, "Text",ExpressionUUID->"d35d7a90-00bf-4c56-a50d-f842a11ba142"],
+Cell[28760, 704, 444, 10, 65, "Code",ExpressionUUID->"218e6ea6-5f4e-4ca2-a3b8-bc51617e68a0"],
+Cell[29207, 716, 549, 10, 73, "Text",ExpressionUUID->"3af8c145-1510-462e-a69b-f65536b47413"],
+Cell[29759, 728, 214, 4, 37, "Input",ExpressionUUID->"72cd1fd3-d59a-448b-a136-9fc7654793b4"],
+Cell[29976, 734, 154, 3, 37, "Input",ExpressionUUID->"290340e9-425a-4e7e-b891-5195d3354e0a"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[30167, 742, 197, 3, 84, "Section",ExpressionUUID->"e92e6943-a20e-43c0-9025-230417d9a0e6"],
+Cell[30367, 747, 3397, 58, 533, "Text",ExpressionUUID->"2fe26198-e3ce-4c80-a66e-af14297d56e7"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
